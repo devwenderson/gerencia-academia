@@ -25,15 +25,15 @@ class CustomUserManager(UserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(blank=True, default='', unique=True)
-    name = models.CharField(max_length=255, blank=True, default='')
+    email = models.EmailField(verbose_name="Email", blank=True, default='', unique=True)
+    name = models.CharField(verbose_name="Nome", max_length=255, blank=True, default='')
 
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(verbose_name="Ativo", default=True)
+    is_superuser = models.BooleanField(verbose_name="Administrador", default=False)
     is_staff = models.BooleanField(default=False)
 
-    date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(blank=True, null=True)
+    date_joined = models.DateTimeField(verbose_name="Cadastrado em", default=timezone.now)
+    last_login = models.DateTimeField(verbose_name="Ultimo login", blank=True, null=True)
 
     objects = CustomUserManager()
 

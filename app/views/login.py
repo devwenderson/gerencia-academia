@@ -1,34 +1,21 @@
 from django.views.generic.base import TemplateView
 from django.views import View
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Models
 from app.models.user import User
 
 # Autenticar
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 
 
 # Forms
-from app.forms import UserCreationForm
+from app.forms.user import UserCreationForm, UserUpdateForm
 
 class HomePageView(TemplateView):
     template_name = "index.html"
-
-class CreateUserView(View):
-    template_name = "login/register.html"
-    
-    def get(self, request, *args, **kwargs):
-        form = UserCreationForm()
-        return render(request, self.template_name, {"form": form})
-    
-    def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.POST)
-        if (form.is_valid()):
-            form.save()
-            return redirect("login")
-        return render(request, self.template_name, {"form": form})
 
 class LoginView(View):
     template_name = "login/login.html"
@@ -60,3 +47,35 @@ class DataUserView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+class CreateUserView(View):
+    template_name = "login/register.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = UserCreationForm()
+        return render(request, self.template_name, {"form": form})
+    
+    def post(self, request, *args, **kwargs):
+        form = UserCreationForm(request.POST)
+        if (form.is_valid()):
+            form.save()
+            return redirect("login")
+        return render(request, self.template_name, {"form": form})   
+
+class UpdateUserView(LoginRequiredMixin, View):
+    template_name = "login/update-profile.html"
+
+    def get(self, request, *args, **kwargs):
+        form = UserUpdateForm(instance=request.user)
+        return render(request, self.template_name, {"form": form})
+    
+    def post(self, request, *args, **kwargs):
+        form = UserUpdateForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, "Perfil atualizado com sucesso")
+            return redirect("user-data")
+
+        return render(request, self.template_name, {"form": form})

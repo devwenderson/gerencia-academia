@@ -2,17 +2,17 @@ from django.views.generic.base import TemplateView
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse_lazy
 
 # Models
-from app.models.user import User
+from app.models.user_models import User
 
 # Autenticar
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 
-
 # Forms
-from app.forms.user import UserCreationForm, UserUpdateForm
+from app.forms.user_forms import UserCreationForm, UserUpdateForm
 
 class HomePageView(TemplateView):
     template_name = "index.html"

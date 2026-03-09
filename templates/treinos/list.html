@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{% url 'create-treino' %}">Criar treino</a>
+<table>
+	<thead>
+		<tr>
+			<th>Treino</th>
+			<th>Exercicio</th>
+			<th>Séries</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for treino in treinos %}
+			<tr>
+				<td>{{ treino.tipo }}</td>
+				<td>{{ treino.exercicio }}</td>
+				<td>{{ treino.series }} de {{ treino.repeticoes }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

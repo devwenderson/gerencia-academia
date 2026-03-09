@@ -24,13 +24,18 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
     
-class UserUpdateForm(forms.ModelForm):
-    password1 = forms.CharField(label="Nova senha", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirmar nova senha", widget=forms.PasswordInput)
-
+class UserNameUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["name"]
+
+class UserPasswordUpdateForm(forms.ModelForm):
+    password1 = forms.CharField(label="Nova senha", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirmar nova senha", widget=forms.PasswordInput)
+    
+    class Meta:
+        model = User
+        fields = []
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{% url 'create-assinatura' %}">Criar assinatura</a>
+<table>
+	<thead>
+		<tr>
+			<th>Valor</th>
+			<th>Criado em</th>
+			<th>Status</th>
+			<th>Opções</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for assinatura in assinaturas %}
+			<tr>
+				<td>{{ assinatura.valor }}</td>
+				<td>{{ assinatura.criado_em }}</td>
+				<td>{{ assinatura.get_status_display }}</td>
+				<td>
+					<a href="{% url 'detail-assinatura' assinatura.pk %}">Detalhar</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

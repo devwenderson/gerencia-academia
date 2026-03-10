@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Criar assinatura</h2>
+<form action="{% url 'create-assinatura' %}" method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Criar">
+</form>
+{% endblock content %}

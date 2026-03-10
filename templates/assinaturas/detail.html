@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Assinatura de {{ assinatura.cliente.get_full_name }}</h2>
+<h3>Status: {{ assinatura.status }}</h3>
+<h4>Pagamentos</h4>
+<table>
+	<thead>
+		<tr>
+			<th>Valor</th>
+			<th>Vencimento em</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for pagamento in pagamentos %}
+			<tr>
+				<td>{{ pagamento.valor }}</td>
+				<td>{{ pagamento.vencimento }}</td>
+				<td>{{ pagamento.status }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

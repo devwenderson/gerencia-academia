@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Excluir assinatura: {{ assinatura }}</h2>
+<form action="{% url 'delete-assinatura' assinatura.pk %}" method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Excluir">
+</form>
+{% endblock content %}

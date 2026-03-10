@@ -1,5 +1,6 @@
 from django.db import models
 from app.models.user_models import User
+from django.urls import reverse
 
 class Treino(models.Model):
     tipo = models.CharField(verbose_name="Tipo do treino", max_length=30, blank=False, null=False)
@@ -14,3 +15,7 @@ class Treino(models.Model):
 
     def __str__(self):
         return f"{self.cliente.get_short_name()}-{self.tipo}|{self.exercicio}"
+    
+    def get_absolute_url(self):
+        return reverse("detail-treino", kwargs={"pk": self.pk})
+    

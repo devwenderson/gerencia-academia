@@ -1,12 +1,13 @@
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from app.models.treino_models import Treino
 
-from app.forms.treino_forms import TreinoCreateForm
+from app.forms.treino_forms import TreinoCreateForm, TreinoUpdateForm
 
 class TreinoCreateView(LoginRequiredMixin, CreateView):
     model = Treino
@@ -26,7 +27,6 @@ class TreinoCreateView(LoginRequiredMixin, CreateView):
             form.fields.pop("cliente")
         return form
     
-
 class TreinoListView(LoginRequiredMixin, ListView):
     model = Treino
     context_object_name = "treinos"
@@ -34,3 +34,20 @@ class TreinoListView(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         return Treino.objects.filter(cliente=self.request.user)
+    
+class TreinoUpdateView(LoginRequiredMixin, UpdateView):
+    model = Treino
+    template_name = "treinos/update.html"
+    form_class = TreinoUpdateForm
+    context_object_name = "treino"
+
+    def form_valid(self, form):
+        messages.success(self.request, "Treino atualizado com sucesso!")
+        return super().form_valid(form)
+    
+
+class TreinoDetailView(LoginRequiredMixin, DetailView):
+    model = Treino
+    template_name = "treinos/detail.html"
+    context_object_name = "treino"
+    

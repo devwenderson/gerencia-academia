@@ -6,7 +6,7 @@ from app.views.assinatura_views import (AssinaturaDeleteView,
                                         AssinaturaDetailView,
                                         PagamentoListView)
 urlpatterns = [
-    path("assinatura/criar", AssinaturaCreateView.as_view(), name="create-assinatura"),
+    # path("assinatura/criar", AssinaturaCreateView.as_view(), name="create-assinatura"),
     path("assinatura/listar", AssinaturaListView.as_view(), name="list-assinatura"),
     path("assinatura/<int:pk>", AssinaturaDetailView.as_view(), name="detail-assinatura"),
     path("assinatura/<int:pk>/atualizar", AssinaturaUpdateView.as_view(), name="update-assinatura"),

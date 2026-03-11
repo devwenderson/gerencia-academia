@@ -9,3 +9,4 @@ Um sistema de gerência de assinaturas de academia
 - [Django Models](https://docs.djangoproject.com/en/6.0/topics/db/models/)
 - [Class-based views](https://docs.djangoproject.com/en/6.0/topics/class-based-views/generic-display/)
 - [Handling forms with class-based views](https://docs.djangoproject.com/en/6.0/topics/class-based-views/generic-editing/)
+- [Customizing authentication in django](https://docs.djangoproject.com/en/6.0/topics/auth/customizing/#extending-user)

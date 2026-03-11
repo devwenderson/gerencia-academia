@@ -3,14 +3,14 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
+
 # Models
 from app.models.user_models import User
+from app.models.assinatura_models import Assinatura, Plano
 
 # Autenticar
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.forms import PasswordChangeForm
 
 # Forms
 from app.forms.user_forms import UserCreationForm, UserPasswordUpdateForm, UserNameUpdateForm
@@ -74,7 +74,7 @@ class UserNameUpdateView(LoginRequiredMixin, View):
         form = UserNameUpdateForm(request.POST, instance=request.user)
 
         if form.is_valid():
-            user = form.save()
+            form.save()
             messages.success(request, "Nome atualizado com sucesso")
             return redirect("user-data")
 

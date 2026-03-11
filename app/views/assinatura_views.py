@@ -1,7 +1,6 @@
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -25,21 +24,9 @@ class AssinaturaCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         if not self.request.user.is_staff:
             form.instance.cliente = self.request.user
-      
-        response = super().form_valid(form)
-
-        assinatura = self.object
-        vencimento = assinatura.criado_em + timedelta(days=30)
-
-        pagamento = Pagamento.objects.create(
-            assinatura=assinatura,
-            valor=assinatura.valor,
-            vencimento=vencimento
-        )
-
         messages.success(self.request, "Assinatura criada com sucesso")
-
-        return response
+        return super().form_valid(form)
+         
 
 class AssinaturaDetailView(LoginRequiredMixin, DetailView):
     model = Assinatura

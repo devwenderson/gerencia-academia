@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from app.models import Assinatura
 
 class PagamentoStatus(models.IntegerChoices):
     PENDENTE = 1, "Pendente"
@@ -8,7 +7,7 @@ class PagamentoStatus(models.IntegerChoices):
     ATRASADO = 3, "Atrasado"
 
 class Pagamento(models.Model):
-    assinatura = models.ForeignKey(Assinatura, on_delete=models.CASCADE, verbose_name="Assinatura")
+    assinatura = models.ForeignKey("app.Assinatura", on_delete=models.CASCADE, verbose_name="Assinatura")
     valor = models.DecimalField(verbose_name="Valor", max_digits=6, decimal_places=2, blank=False, null=False)
     vencimento = models.DateField(verbose_name="Vencimento em", blank=True, null=False)
     status = models.IntegerField(verbose_name="Satus", choices=PagamentoStatus, default=PagamentoStatus.PENDENTE)

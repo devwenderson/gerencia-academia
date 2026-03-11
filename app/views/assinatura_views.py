@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from app.models.assinatura_models import Assinatura
 from app.models.pagamento_models import Pagamento
 
-from app.forms.assinatura_forms import AssinaturaCreateForm, AssinaturaAdminCreateForm
+from app.forms.assinatura_forms import AssinaturaCreateForm, AssinaturaAdminCreateForm, AssinaturaUpdateForm
 
 class AssinaturaCreateView(LoginRequiredMixin, CreateView):
     template_name = "assinaturas/create.html"
@@ -56,7 +56,10 @@ class AssinaturaDetailView(LoginRequiredMixin, DetailView):
         return context
 
 class AssinaturaUpdateView(LoginRequiredMixin, UpdateView):
-    pass
+    model = Assinatura
+    template_name = "assinaturas/update.html"
+    context_object_name = "assinatura"
+    form_class = AssinaturaUpdateForm
 
 class AssinaturaListView(LoginRequiredMixin, ListView):
     model = Assinatura

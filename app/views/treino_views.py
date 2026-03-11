@@ -33,7 +33,10 @@ class TreinoListView(LoginRequiredMixin, ListView):
     template_name = "treinos/list.html"
     
     def get_queryset(self):
-        return Treino.objects.filter(cliente=self.request.user)
+        if not self.request.user.is_staff:
+            return Treino.objects.filter(cliente=self.request.user)
+        else:
+            return Treino.objects.all()
     
 class TreinoUpdateView(LoginRequiredMixin, UpdateView):
     model = Treino

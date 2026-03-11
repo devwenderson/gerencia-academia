@@ -1,55 +1,23 @@
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from app.models.user_models import User
+from app.management.commands.users_data import users
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        help = "Cadastrando usuários..."
-        self.stdout.write(help)
 
+        self.exibir_mensagem("Criando migrações...")
         call_command("makemigrations")
+        self.exibir_mensagem("Atualizando tabelas do banco de dados...")
         call_command("migrate")
-
-        users = [
-            {
-                "email": "admin@email.com",
-                "name": "admin",
-                "password": "1234",
-                "is_superuser": True,
-                "is_staff": True
-            },
-            {
-                "email": "funcionario@email.com",
-                "name": "Funcionario",
-                "password": "1234",
-                "is_superuser": False,
-                "is_staff": True
-            },
-            {
-                "email": "a@email.com",
-                "name": "Usuario A",
-                "password": "1234",
-                "is_superuser": False,
-                "is_staff": False
-            },
-            {
-                "email": "b@email.com",
-                "name": "Usuario B",
-                "password": "1234",
-                "is_superuser": False,
-                "is_staff": False
-            },
-            {
-                "email": "c@email.com",
-                "name": "Usuario C",
-                "password": "1234",
-                "is_superuser": False,
-                "is_staff": False
-            },
-        ]
+        self.exibir_mensagem("Cadastrando usuários...")
 
         for data in users:
+            if (self.verifica_usuario(data)):
+                self.stdout.write(f"Usuário [{data['email']}] já existe!")
+                continue
+
             user = User.objects.create(
                 email=data['email'], 
                 name=data['name'],
@@ -61,4 +29,13 @@ class Command(BaseCommand):
             user.set_password(data['password'])
             user.save()
         
-        self.stdout.write("Usuários cadastrados!")
+        self.exibir_mensagem("Usuários cadastrados!")
+        
+        
+    def verifica_usuario(self, data):
+        return User.objects.filter(email=data["email"]).exists()
+    
+    def exibir_mensagem(self, texto):
+        
+        self.stdout.write(f"\n**** {texto} ****\n")
+        

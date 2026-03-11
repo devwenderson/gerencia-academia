@@ -17,7 +17,7 @@
 			<tr>
 				<td>{{ pagamento.valor }}</td>
 				<td>{{ pagamento.vencimento }}</td>
-				<td>{{ pagamento.status }}</td>
+				<td>{{ pagamento.get_status_display }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>

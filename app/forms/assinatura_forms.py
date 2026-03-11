@@ -10,3 +10,8 @@ class AssinaturaAdminCreateForm(forms.ModelForm):
     class Meta:
         model = Assinatura
         fields = ["valor", "cliente"]
+    
+class AssinaturaUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Assinatura
+        fields = ["valor", "status"]

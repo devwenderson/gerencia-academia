@@ -9,7 +9,7 @@ urlpatterns = [
     path("assinatura/criar", AssinaturaCreateView.as_view(), name="create-assinatura"),
     path("assinatura/listar", AssinaturaListView.as_view(), name="list-assinatura"),
     path("assinatura/<int:pk>", AssinaturaDetailView.as_view(), name="detail-assinatura"),
-    path("assinatura/<int:pk>/atualizar", AssinaturaListView.as_view(), name="update-assinatura"),
+    path("assinatura/<int:pk>/atualizar", AssinaturaUpdateView.as_view(), name="update-assinatura"),
     path("assinatura/<int:pk>/excluir", AssinaturaDeleteView.as_view(), name="delete-assinatura"),
     path("pagamento/listar", PagamentoListView.as_view(), name="list-pagamento"),
 ]

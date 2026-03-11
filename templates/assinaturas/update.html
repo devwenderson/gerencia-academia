@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Atualizar treino</h2>
-<form action="{% url 'update-treino' treino.pk %}" method="POST">
+<h2>Atualizar assinatura {{ assinatura }}</h2>
+<form action="{% url 'update-assinatura' assinatura.pk %}" method="POST">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<input type="submit" value="Atualizar">

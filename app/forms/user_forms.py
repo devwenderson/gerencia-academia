@@ -10,6 +10,12 @@ class UserCreationForm(forms.ModelForm):
         model = User
         fields = ["email", "name"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({"class": "form__input"})
+        
+
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")

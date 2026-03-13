@@ -7,28 +7,39 @@
     <title>
         {% block title %}Base{% endblock title %}
     </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="nav">
-        <a href="{% url 'index' %}">Início</a>
-        {% if request.user.is_authenticated %}
-            <a href="{% url 'list-assinatura' %}">Assinatura</a>
-            <a href="{% url 'list-treino' %}">Treinos</a>
-            <a href="{% url 'user-data' %}">Perfil</a>
-            <a href="{% url 'logout' %}">Sair</a>
-        
-        {% if request.user.is_staff %}
-            <a href="{% url 'list-pagamento' %}">Pagamentos</a>    
-        {% endif %}
+    <header>
+        <nav class="container">
+            <ol> 
+                <li><a href="{% url 'index' %}">Início</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'list-assinatura' %}">Assinatura</a></li>
+                    <li><a href="{% url 'list-treino' %}">Treinos</a></li>
+                    <li><a href="{% url 'user-data' %}">Perfil</a></li>
+                    {% if request.user.is_staff %}
+                        <li><a href="{% url 'list-pagamento' %}">Pagamentos</a> </li>   
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'login' %}">Entrar</a></li>
+                    <li><a href="{% url 'user-create' %}">Cadastrar</a></li>
+                {% endif %}
+            </ol>
+        </nav>
+    </header>
 
-        {% else %}
-            <a href="{% url 'login' %}">Entrar</a>
-            <a href="{% url 'user-create' %}">Cadastrar</a>
-        {% endif %}
-    </nav>
-    {% block content %}
-    {% endblock content %}
+    <main class="container">
+        {% block content %}
+        {% endblock content %}
+    </main>
 
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+
+    {% block scripts %}
+    {% endblock scripts %}
 </body>
 </html>

@@ -1,0 +1,18 @@
+@import url(root-atributes.css);
+
+section#user-section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section#user-section h2 {
+    flex-basis: 100%;
+    text-align: center;
+    font-weight: 400;
+}
+
+section#user-section h2 span {
+    flex-basis: 100%;
+    text-align: center;
+    font-weight: bold;
+}

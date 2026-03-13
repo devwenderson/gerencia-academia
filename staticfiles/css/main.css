@@ -1,3 +1,22 @@
-nav {
-    background-color: red;
+@import url(root-atributes.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+header {
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 90em;
+    margin: 0 auto;
 }

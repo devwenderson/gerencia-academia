@@ -1,10 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
     <h1>Cadastrar usuário</h1>
     <form action="{% url 'user-create' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Cadastrar">
+        {% for field in form.visible_fields %}
+        <div class="form-field-wrapper">
+            {{ field.label }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <input type="submit" class="button" value="Cadastrar">
     </form>
-
 {% endblock content %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock scripts %}

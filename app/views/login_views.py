@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 # Models
-from app.models.user_models import User
-from app.models.assinatura_models import Assinatura, Plano
+from app.models.assinatura_models import Assinatura
+from app.models.treino_models import Treino
 
 # Autenticar
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,8 +15,16 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 # Forms
 from app.forms.user_forms import UserCreationForm, UserPasswordUpdateForm, UserNameUpdateForm
 
-class HomePageView(TemplateView):
+class HomePageView(LoginRequiredMixin, TemplateView):
     template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        assinatura = Assinatura.objects.get(cliente=self.request.user)
+        context["treinos"] = Treino.objects.filter(cliente=self.request.user)
+        context["assinatura"] = assinatura
+        context["pagamentos"] = assinatura.get_all_pagamentos
+        return context
 
 class LoginView(View):
     template_name = "login/login.html"

@@ -21,6 +21,10 @@ class Assinatura(models.Model):
     def __str__(self):
         return f"{self.cliente.get_full_name()} | {self.status}"
     
+    @property
+    def get_all_pagamentos(self):
+        return Pagamento.objects.filter(assinatura=self)
+
     def get_absolute_url(self):
         return reverse("detail-assinatura", kwargs={"pk": self.pk})
     
@@ -32,6 +36,8 @@ class Assinatura(models.Model):
             valor=self.valor,
             vencimento=vencimento
         )
+
+    
     
 class Plano(models.Model):
     valor = models.DecimalField(verbose_name="Valor do plano", max_digits=6, decimal_places=2, null=False)

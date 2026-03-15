@@ -10,13 +10,22 @@
 
 body {
     font-family: "Inter", sans-serif;
+    background-color: var(--background-color);
 }
 
 header {
     background-color: var(--background-color);
 }
 
+h3 {
+    font-size: 1.5em;
+}
+
 .container {
     max-width: 90em;
     margin: 0 auto;
+}
+
+.center-text {
+    text-align: center;
 }

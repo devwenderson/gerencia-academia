@@ -8,14 +8,13 @@ nav ol {
 
 nav ol li a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-color-white);
 }
 
 .form__input {
     border: none;
     padding: 1em 1em;
     border-radius: var(--border-radius-1);
-    box-shadow: 1px 1px 8px rgb(216, 216, 216);
     font-size: 1em;
 }
 
@@ -25,8 +24,18 @@ nav ol li a {
     border-radius: var(--border-radius-1);
 }
 
-@media (max-width: 600px) {
+.button-green {
+    background-color: var(--button-color-green);
+    color: var(--text-color-black);
+    margin: 0.5em 0;
+}
+
+.link-green {
+    color: var(--text-color-green);
+}
+
+/* @media (max-width: 600px) {
     nav {
 
     }
-}
+} */

@@ -2,5 +2,11 @@
     --border-radius-1: 1em;
 
     --background-color: #232323;
-    --text-color: #ffffff;
+    --background-color-white: #ffffff;
+
+    --text-color-white: #ffffff;
+    --text-color-green: #E2F163;
+    --text-color-black: #232323;
+
+    --button-color-green: #E2F163;
 }

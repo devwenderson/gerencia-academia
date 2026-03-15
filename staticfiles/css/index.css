@@ -1,0 +1,43 @@
+@import url(./root-atributes.css);
+
+section#index-user-area-section {
+    color: var(--text-color-white);
+}
+
+section#user-area-treinos-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2.index-user-area-section__title {
+    background-color: var(--background-color-white);
+    color: var(--text-color-black);
+    padding: 3em 2em;
+    text-align: center;
+    margin-bottom: 1em;
+    border-radius: 0 0 1em 1em;
+}
+
+.user-area-treinos-section__title {
+    text-align: center;
+}
+
+ul#user-area-treinos-section__treinos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+}
+
+li.treino-card {
+    background-color: var(--background-color-white);
+    color: var(--text-color-black);
+    padding: 1em 2em;
+    border-radius: 1em;
+    width: 100%;
+}
+
+p.treino-card__title {
+    font-weight: bold;
+}
